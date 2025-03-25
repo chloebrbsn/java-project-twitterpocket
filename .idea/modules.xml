@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/fr.ynov.twitter/fr.ynov.twitter.iml" filepath="$PROJECT_DIR$/fr.ynov.twitter/fr.ynov.twitter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/java-project-twitterpocket.iml" filepath="$PROJECT_DIR$/.idea/java-project-twitterpocket.iml" />
+    </modules>
+  </component>
+</project>
