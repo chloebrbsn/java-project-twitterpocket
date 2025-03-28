@@ -9,7 +9,7 @@ public class TweetButtons extends JPanel {
     private final JButton rtButton;
 
     public TweetButtons() {
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.setLayout(new FlowLayout(FlowLayout.RIGHT));
         this.setBackground(Color.WHITE);
 
         likeButton = new JButton("❤️ Like");

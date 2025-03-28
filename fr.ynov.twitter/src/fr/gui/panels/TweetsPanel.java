@@ -49,7 +49,6 @@ public class TweetsPanel extends JPanel {
         tweetBox.add(textPanel, BorderLayout.CENTER);
         tweetBox.add(new TweetButtons(), BorderLayout.SOUTH);
 
-
         tweetsContainer.add(tweetBox);
         tweetsContainer.revalidate();
         tweetsContainer.repaint();

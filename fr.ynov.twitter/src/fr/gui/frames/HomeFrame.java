@@ -1,45 +1,28 @@
 package fr.gui.frames;
 
 import fr.domain.Tweets;
-import fr.domain.User;
-import fr.gui.buttons.TweetButtons;
+import fr.gui.buttons.NewTweetButton;
 import fr.gui.panels.TweetsPanel;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class HomeFrame extends FrameBase {
 
-    public HomeFrame(String title) {
-        super();
-        JFrame frame = new JFrame("Home");
+    private final TweetsPanel tweetsPanel;
 
-        TweetsPanel tweetsPanel = new TweetsPanel();
+    public HomeFrame() {
+        super("Twitter pocket");
+
+        tweetsPanel = new TweetsPanel();
         add(tweetsPanel, BorderLayout.CENTER);
 
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-        tweetsPanel.addTweet(new Tweets(new User("New Profile"), "Hello world!"));
-
+        NewTweetButton newTweetButton = new NewTweetButton(HomeFrame.this);
+        add(newTweetButton, BorderLayout.SOUTH);
         setVisible(true);
     }
+
+    public void addTweetToPanel (Tweets tweet) {
+        tweetsPanel.addTweet(tweet);
+    }
 }
+
