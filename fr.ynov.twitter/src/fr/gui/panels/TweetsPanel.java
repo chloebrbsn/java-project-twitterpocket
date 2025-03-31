@@ -1,6 +1,7 @@
 package fr.gui.panels;
 
 import fr.domain.Tweets;
+import fr.gui.buttons.LikeButton;
 import fr.gui.buttons.TweetButtons;
 
 import javax.swing.*;
@@ -40,17 +41,22 @@ public class TweetsPanel extends JPanel {
         textPanel.setBackground(Color.WHITE);
 
         JLabel usernameLabel = new JLabel(tweets.getUser().getUsername());
-
         JLabel messageLabel = new JLabel(tweets.getMessage());
 
         textPanel.add(usernameLabel);
         textPanel.add(messageLabel);
 
+        LikeButton likeButton = new LikeButton();
+        TweetButtons tweetButtons = new TweetButtons();
+
+        tweetButtons.add(likeButton.getLikeButtonPanel());
+
         tweetBox.add(textPanel, BorderLayout.CENTER);
-        tweetBox.add(new TweetButtons(), BorderLayout.SOUTH);
+        tweetBox.add(tweetButtons, BorderLayout.SOUTH);
 
         tweetsContainer.add(tweetBox);
         tweetsContainer.revalidate();
         tweetsContainer.repaint();
     }
+
 }

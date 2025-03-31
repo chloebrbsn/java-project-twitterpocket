@@ -7,20 +7,30 @@ import javax.swing.*;
 import java.awt.*;
 
 public class NewTweetFrame extends JFrame {
-    private final JTextField preTweet;
+    private final JTextField usernameField;
+    private final JTextArea tweetTextArea;
     private final HomeFrame homeFrame;
 
     public NewTweetFrame(HomeFrame homeFrame) {
         super("What's up ?");
         this.homeFrame = homeFrame;
         this.setSize(400, 300);
-        //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        preTweet = new JTextField("What's up?");
-        mainPanel.add(preTweet, BorderLayout.CENTER);
+        JPanel userPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel usernameLabel = new JLabel("Username:");
+        usernameField = new JTextField(15);
+        userPanel.add(usernameLabel);
+        userPanel.add(usernameField);
+
+        mainPanel.add(userPanel, BorderLayout.NORTH);
+
+        tweetTextArea = new JTextArea("What's up?", 5, 30);
+        mainPanel.add(new JScrollPane(tweetTextArea), BorderLayout.CENTER);
 
         JButton sendTweetButton = new JButton("Send Tweet");
         sendTweetButton.addActionListener(e -> sendTweet());
@@ -30,12 +40,21 @@ public class NewTweetFrame extends JFrame {
     }
 
     public void sendTweet() {
-        String message = preTweet.getText();
-        if (!message.isEmpty()) {
-            Tweets newTweet = new Tweets(new User("New Profile"), message);
-            homeFrame.addTweetToPanel(newTweet);
-            dispose();
+        String username = usernameField.getText().trim();
+        String message = tweetTextArea.getText().trim();
+
+        if (username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        if (message.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tweet cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Tweets newTweet = new Tweets(new User(username), message);
+        homeFrame.addTweetToPanel(newTweet);
+        dispose();
     }
 }
-
