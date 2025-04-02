@@ -1,7 +1,6 @@
 package fr.gui.panels;
 
 import fr.domain.Tweets;
-import fr.gui.buttons.LikeButton;
 import fr.gui.buttons.TweetButtons;
 
 import javax.swing.*;
@@ -9,10 +8,16 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A panel that displays a list of tweets in a scrollable container.
+ */
 public class TweetsPanel extends JPanel {
     private final List<Tweets> tweets;
     private final JPanel tweetsContainer;
 
+    /**
+     * Constructs a TweetsPanel with a scrollable list of tweets.
+     */
     public TweetsPanel() {
         this.tweets = new ArrayList<>();
         this.setLayout(new BorderLayout());
@@ -27,36 +32,51 @@ public class TweetsPanel extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void addTweet(Tweets tweets) {
-        this.tweets.add(tweets);
+    /**
+     * Adds a tweet to the panel and updates the display.
+     */
+    public void addTweet(Tweets tweet) {
+        this.tweets.add(tweet);
 
-        JPanel tweetBox = new JPanel();
-        tweetBox.setLayout(new BorderLayout());
-        tweetBox.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-        tweetBox.setBackground(Color.WHITE);
-        tweetBox.setMaximumSize(new Dimension(500, 100));
+        try {
+            if (tweet == null) {
+                throw new IllegalArgumentException("You must provide a Tweet !");
+            }
 
-        JPanel textPanel = new JPanel();
-        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
-        textPanel.setBackground(Color.WHITE);
+            JPanel tweetBox = new JPanel();
+            tweetBox.setLayout(new BorderLayout());
+            tweetBox.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+            tweetBox.setBackground(Color.WHITE);
+            tweetBox.setMaximumSize(new Dimension(500, 180));
 
-        JLabel usernameLabel = new JLabel(tweets.getUser().getUsername());
-        JLabel messageLabel = new JLabel(tweets.getMessage());
+            JPanel textPanel = new JPanel();
+            textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+            textPanel.setBackground(Color.WHITE);
 
-        textPanel.add(usernameLabel);
-        textPanel.add(messageLabel);
+            JLabel usernameLabel = new JLabel(tweet.getUser().getUsername());
+            JLabel messageLabel = new JLabel(tweet.getMessage());
 
-        LikeButton likeButton = new LikeButton();
-        TweetButtons tweetButtons = new TweetButtons();
+            textPanel.add(usernameLabel);
+            textPanel.add(messageLabel);
 
-        tweetButtons.add(likeButton.getLikeButtonPanel());
+            TweetButtons tweetButtons = new TweetButtons();
 
-        tweetBox.add(textPanel, BorderLayout.CENTER);
-        tweetBox.add(tweetButtons, BorderLayout.SOUTH);
+            JPanel bottomPanel = new JPanel();
+            bottomPanel.setLayout(new BorderLayout());
 
-        tweetsContainer.add(tweetBox);
-        tweetsContainer.revalidate();
-        tweetsContainer.repaint();
+            bottomPanel.add(tweetButtons, BorderLayout.NORTH);
+
+            CommentPanel commentPanel = new CommentPanel(tweet);
+            bottomPanel.add(commentPanel, BorderLayout.CENTER);
+
+            tweetBox.add(textPanel, BorderLayout.CENTER);
+            tweetBox.add(bottomPanel, BorderLayout.SOUTH);
+
+            tweetsContainer.add(tweetBox);
+            tweetsContainer.revalidate();
+            tweetsContainer.repaint();
+        } catch (Exception e) {
+            System.err.println("Cannot add the tweet to the list : " + e.getMessage());
+        }
     }
-
 }

@@ -5,6 +5,10 @@ import fr.gui.frames.HomeFrame;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel containing the "new tweet" button, allowing users to create a new tweet.
+ * When clicked, it opens a new frame where the user can create and post a tweet.
+ */
 public class NewTweetButton extends JPanel {
 
     public NewTweetButton(HomeFrame homeFrame) {

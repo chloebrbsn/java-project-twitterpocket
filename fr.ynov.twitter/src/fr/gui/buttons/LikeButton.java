@@ -3,6 +3,12 @@ package fr.gui.buttons;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * This class represents a "like" button (with the JLabel likeLabel).
+ * It's used to display the likes numbers,
+ * and to increment the number (+1, with likeCount) when you click on it.
+ */
 public class LikeButton extends JButton {
     private int likeCount;
     private final JLabel likeLabel;
@@ -24,6 +30,9 @@ public class LikeButton extends JButton {
         });
     }
 
+    /**
+     * Creates and returns a panel with the like button, and its count.
+     */
     public JPanel getLikeButtonPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));

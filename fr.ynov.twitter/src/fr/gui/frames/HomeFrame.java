@@ -6,6 +6,10 @@ import fr.gui.panels.TweetsPanel;
 
 import java.awt.*;
 
+/**
+ * The main application's frame that serves as the homepage.
+ * It displays tweets and buttons and allows users to create new tweets.
+ */
 public class HomeFrame extends FrameBase {
 
     private final TweetsPanel tweetsPanel;
